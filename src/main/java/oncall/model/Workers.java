@@ -12,4 +12,18 @@ public class Workers {
         this.weekdayWorkers = weekdayWorkers;
         this.dayOffWorkers = dayOffWorkers;
     }
+
+    public String findWorkerByDayOfWeek(int month, int date, String dayOfTheWeek) {
+        //요일에 따라서 가능한 근무자가 다르다.
+        //요일이 휴일인지 확인해야 한다. //(휴일은 토,일,법적 공휴일)
+
+        //휴일이라면
+        if (DayOfTheWeek.isDayOff(dayOfTheWeek) || Holidays.isHoliday(month, date)) {
+            //휴일 순번의 근무자 리턴
+            return dayOffWorkers.getWorker();
+        }
+
+        //평일(월~금) 이라면
+        return weekdayWorkers.getWorker();
+    }
 }

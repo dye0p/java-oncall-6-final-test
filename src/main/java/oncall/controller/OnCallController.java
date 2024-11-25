@@ -6,6 +6,8 @@ import oncall.model.Day;
 import oncall.model.DayOffWorkers;
 import oncall.model.Month;
 import oncall.model.WeekdayWorkers;
+import oncall.model.WorkSchedule;
+import oncall.model.WorkSchedules;
 import oncall.model.Worker;
 import oncall.model.Workers;
 import oncall.view.InputView;
@@ -23,7 +25,11 @@ public class OnCallController {
 
     public void run() {
         Calender calender = tryReadMonthAndDay();
-        Workers weekdayWorkers = tryReadWorkers();
+        Workers workers = tryReadWorkers();
+
+        WorkSchedules workSchedule = new WorkSchedules(calender, workers);
+
+        List<WorkSchedule> workSchedules = workSchedule.createWorkSchedule();
     }
 
     private Calender tryReadMonthAndDay() {

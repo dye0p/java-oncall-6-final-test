@@ -41,4 +41,15 @@ public class WeekdayWorkers {
     public List<Worker> getWeekdayWorkers() {
         return weekdayWorkers;
     }
+
+    //근무자 리턴
+    int workerCount = 0;
+
+    public String getWorker() {
+        workerCount = workerCount % weekdayWorkers.size();
+
+        Worker worker = weekdayWorkers.get(workerCount);
+        workerCount++;
+        return worker.getName();
+    }
 }
