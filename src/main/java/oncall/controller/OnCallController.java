@@ -30,6 +30,8 @@ public class OnCallController {
         WorkSchedules workSchedule = new WorkSchedules(calender, workers);
 
         List<WorkSchedule> workSchedules = workSchedule.createWorkSchedule();
+
+        outputView.printWorkSchedules(workSchedules);
     }
 
     private Calender tryReadMonthAndDay() {
