@@ -1,6 +1,9 @@
 package oncall.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import oncall.exception.ErrorMessage;
+import oncall.model.Worker;
 
 public class InputConvertor {
 
@@ -9,6 +12,19 @@ public class InputConvertor {
         String[] monthAndDay = inputSplit(input);
         validateSize(monthAndDay);
         return monthAndDay;
+    }
+
+    public static List<Worker> convertWorkers(String input) {
+        validate(input);
+        String[] splitWorkers = inputSplit(input);
+
+        List<Worker> workers = new ArrayList<>();
+
+        for (String splitWorker : splitWorkers) {
+            workers.add(new Worker(splitWorker));
+        }
+
+        return workers;
     }
 
     private static void validate(String input) {

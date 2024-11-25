@@ -1,8 +1,13 @@
 package oncall.controller;
 
+import java.util.List;
 import oncall.model.Calender;
 import oncall.model.Day;
+import oncall.model.DayOffWorkers;
 import oncall.model.Month;
+import oncall.model.WeekdayWorkers;
+import oncall.model.Worker;
+import oncall.model.Workers;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -18,6 +23,7 @@ public class OnCallController {
 
     public void run() {
         Calender calender = tryReadMonthAndDay();
+        Workers weekdayWorkers = tryReadWorkers();
     }
 
     private Calender tryReadMonthAndDay() {
@@ -33,5 +39,33 @@ public class OnCallController {
                 outputView.printErrorMessage(exception.getMessage());
             }
         }
+    }
+
+    private Workers tryReadWorkers() {
+        while (true) {
+            try {
+                WeekdayWorkers weekdayWorkers = tryWeekdayWorkers();
+                DayOffWorkers dayOffWorkers = tryDayOffWorkers();
+                return new Workers(weekdayWorkers, dayOffWorkers);
+            } catch (IllegalArgumentException exception) {
+                outputView.printErrorMessage(exception.getMessage());
+            }
+        }
+    }
+
+    private WeekdayWorkers tryWeekdayWorkers() {
+        while (true) {
+            try {
+                List<Worker> weekdayWorkers = inputView.readWeekdayWorkers();
+                return new WeekdayWorkers(weekdayWorkers);
+            } catch (IllegalArgumentException exception) {
+                outputView.printErrorMessage(exception.getMessage());
+            }
+        }
+    }
+
+    private DayOffWorkers tryDayOffWorkers() {
+        List<Worker> dayOffWorkers = inputView.readDayOffWorkers();
+        return new DayOffWorkers(dayOffWorkers);
     }
 }
