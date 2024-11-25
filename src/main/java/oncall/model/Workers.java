@@ -13,7 +13,7 @@ public class Workers {
         this.dayOffWorkers = dayOffWorkers;
     }
 
-    public String findWorkerByDayOfWeek(int month, int date, String dayOfTheWeek) {
+    public Worker findWorkerByDayOfWeek(int month, int date, String dayOfTheWeek) {
         //요일에 따라서 가능한 근무자가 다르다.
         //요일이 휴일인지 확인해야 한다. //(휴일은 토,일,법적 공휴일)
 

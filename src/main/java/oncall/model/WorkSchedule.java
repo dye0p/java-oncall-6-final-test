@@ -4,14 +4,26 @@ public class WorkSchedule {
 
     private final int month;
     private final int date;
-    private final String dayOfweek;
-    private final String worker;
+    private final String dayOfWeek;
+    private Worker worker;
 
-    public WorkSchedule(int month, int date, String dayOfWeek, String worker) {
+    public WorkSchedule(int month, int date, String dayOfWeek, Worker worker) {
         this.month = month;
         this.date = date;
-        this.dayOfweek = dayOfWeek;
+        this.dayOfWeek = dayOfWeek;
         this.worker = worker;
+    }
+
+    public boolean isSameWorker(WorkSchedule beforeWorker) {
+        return this.worker.getName().equals(beforeWorker.worker.getName());
+    }
+
+    public boolean isHoliday() {
+        return DayOfTheWeek.isDayOff(dayOfWeek) || Holidays.isHoliday(month, date);
+    }
+
+    public void changeWorkerName(String workerName) {
+        this.worker.changeName(workerName);
     }
 
     public int getMonth() {
@@ -22,11 +34,11 @@ public class WorkSchedule {
         return date;
     }
 
-    public String getDayOfweek() {
-        return dayOfweek;
+    public String getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public String getWorker() {
+    public Worker getWorker() {
         return worker;
     }
 }

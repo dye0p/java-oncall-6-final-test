@@ -44,10 +44,8 @@ public class DayOffWorkers {
     //근무자 리턴
     int workerCount = 0;
 
-    public String getWorker() {
+    public Worker getWorker() {
         workerCount = workerCount % dayOffWorkers.size();
-        Worker worker = dayOffWorkers.get(workerCount);
-        workerCount++;
-        return worker.getName();
+        return dayOffWorkers.get(workerCount++);
     }
 }

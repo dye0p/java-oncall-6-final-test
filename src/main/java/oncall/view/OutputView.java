@@ -1,7 +1,7 @@
 package oncall.view;
 
-import java.util.List;
 import oncall.model.WorkSchedule;
+import oncall.model.WorkSchedules;
 
 public class OutputView {
 
@@ -11,11 +11,12 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printWorkSchedules(List<WorkSchedule> workSchedules) {
+    public void printWorkSchedules(WorkSchedules workSchedules) {
         StringBuilder sb = new StringBuilder();
-        for (WorkSchedule workSchedule : workSchedules) {
+        for (WorkSchedule workSchedule : workSchedules.getWorkSchedules()) {
             sb.append(workSchedule.getMonth()).append("월 ").append(workSchedule.getDate()).append("일 ")
-                    .append(workSchedule.getDayOfweek()).append(" ").append(workSchedule.getWorker()).append(NEXT_LINE);
+                    .append(workSchedule.getDayOfWeek()).append(" ").append(workSchedule.getWorker().getName())
+                    .append(NEXT_LINE);
         }
         System.out.println(sb);
     }

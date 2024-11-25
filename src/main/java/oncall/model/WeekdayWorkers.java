@@ -31,7 +31,6 @@ public class WeekdayWorkers {
 
     public void isContain(List<Worker> dayOffWorkers) {
         for (Worker dayOffWorker : dayOffWorkers) {
-            //평일 근무자 순번에 주말 근무자가 들어 있는지?
             if (!weekdayWorkers.contains(dayOffWorker)) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
             }
@@ -42,14 +41,10 @@ public class WeekdayWorkers {
         return weekdayWorkers;
     }
 
-    //근무자 리턴
     int workerCount = 0;
 
-    public String getWorker() {
+    public Worker getWorker() {
         workerCount = workerCount % weekdayWorkers.size();
-
-        Worker worker = weekdayWorkers.get(workerCount);
-        workerCount++;
-        return worker.getName();
+        return weekdayWorkers.get(workerCount++);
     }
 }

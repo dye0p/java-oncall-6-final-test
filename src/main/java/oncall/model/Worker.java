@@ -5,10 +5,14 @@ import oncall.exception.ErrorMessage;
 
 public class Worker {
 
-    private final String name;
+    private String name;
 
     public Worker(String name) {
         validate(name);
+        this.name = name;
+    }
+
+    public void changeName(String name) {
         this.name = name;
     }
 
