@@ -1,6 +1,8 @@
 package oncall.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import oncall.model.dto.WorkScheduleDto;
 
 public class WorkSchedules {
 
@@ -55,5 +57,13 @@ public class WorkSchedules {
             }
         }
         return this;
+    }
+
+    public List<WorkScheduleDto> mapToDto(WorkSchedules workSchedules) {
+        List<WorkScheduleDto> workScheduleResult = new ArrayList<>();
+        for (WorkSchedule workSchedule : workSchedules.getWorkSchedules()) {
+            workScheduleResult.add(WorkScheduleDto.from(workSchedule));
+        }
+        return workScheduleResult;
     }
 }

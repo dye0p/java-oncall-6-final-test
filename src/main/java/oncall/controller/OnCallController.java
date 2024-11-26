@@ -11,6 +11,7 @@ import oncall.model.WeekdayWorkers;
 import oncall.model.WorkSchedules;
 import oncall.model.Worker;
 import oncall.model.Workers;
+import oncall.model.dto.WorkScheduleDto;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -33,7 +34,8 @@ public class OnCallController {
 
     private void displayWorkSchedules(Calender calender, Workers workers) {
         WorkSchedules workSchedules = getWorkSchedules(calender, workers);
-        outputView.printWorkSchedules(workSchedules);
+        List<WorkScheduleDto> workScheduleResult = workSchedules.mapToDto(workSchedules);
+        outputView.printWorkSchedules(workScheduleResult);
     }
 
     private WorkSchedules getWorkSchedules(Calender calender, Workers workers) {
