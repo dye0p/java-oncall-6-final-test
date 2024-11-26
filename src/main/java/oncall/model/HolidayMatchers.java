@@ -4,5 +4,4 @@ package oncall.model;
 public interface HolidayMatchers {
 
     boolean matchHoliday(int month, int date);
-
 }
