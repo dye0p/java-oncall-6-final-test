@@ -1,6 +1,5 @@
 package oncall.model;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import oncall.exception.ErrorMessage;
@@ -28,8 +27,8 @@ public class Month {
         return YearMonth.of(2023, month);
     }
 
-    public DayOfWeek getDayOfTheWeek(int date) {
+    public String getDayOfTheWeek(int date) {
         LocalDate localDate = LocalDate.of(2023, month, date);
-        return localDate.getDayOfWeek();
+        return DayOfTheWeek.getDayOfWeek(localDate.getDayOfWeek());
     }
 }
