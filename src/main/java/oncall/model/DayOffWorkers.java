@@ -8,16 +8,19 @@ public class DayOffWorkers {
 
     private final List<Worker> dayOffWorkers;
 
-    public DayOffWorkers(List<Worker> dayOffWorkers) {
+    private DayOffWorkers(List<Worker> dayOffWorkers) {
         validateDuplicate(dayOffWorkers);
         validateSize(dayOffWorkers);
 
         this.dayOffWorkers = dayOffWorkers;
     }
 
+    public static DayOffWorkers from(List<Worker> dayOffWorkers) {
+        return new DayOffWorkers(dayOffWorkers);
+    }
+
     private void validateDuplicate(List<Worker> workers) {
         HashSet<Worker> nonDuplicateWorkers = new HashSet<>(workers);
-
         if (nonDuplicateWorkers.size() != workers.size()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
@@ -41,7 +44,6 @@ public class DayOffWorkers {
         return dayOffWorkers;
     }
 
-    //근무자 리턴
     int workerCount = 0;
 
     public Worker getWorker() {

@@ -8,16 +8,19 @@ public class WeekdayWorkers {
 
     private final List<Worker> weekdayWorkers;
 
-    public WeekdayWorkers(List<Worker> weekdayWorkers) {
+    private WeekdayWorkers(List<Worker> weekdayWorkers) {
         validateDuplicate(weekdayWorkers);
         validateSize(weekdayWorkers);
 
         this.weekdayWorkers = weekdayWorkers;
     }
 
+    public static WeekdayWorkers from(List<Worker> weekdayWorkers) {
+        return new WeekdayWorkers(weekdayWorkers);
+    }
+
     private void validateDuplicate(List<Worker> workers) {
         HashSet<Worker> nonDuplicateWorkers = new HashSet<>(workers);
-
         if (nonDuplicateWorkers.size() != workers.size()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
