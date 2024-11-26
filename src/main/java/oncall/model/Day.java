@@ -12,8 +12,7 @@ public class Day {
     }
 
     private void validate(String day) {
-        if (!day.equals("일") && !day.equals("월") && !day.equals("화") && !day.equals("수") && !day.equals("목")
-                && !day.equals("금") && !day.equals("토")) {
+        if (!DayOfTheWeek.isDayOfTheWeek(day)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
     }

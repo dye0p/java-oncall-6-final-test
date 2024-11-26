@@ -27,6 +27,11 @@ public enum DayOfTheWeek {
         return dayOfTheWeekValue.dayOfWeek;
     }
 
+    public static boolean isDayOfTheWeek(String day) {
+        return Arrays.stream(values())
+                .anyMatch(value -> value.dayOfWeek.equals(day));
+    }
+
     public static boolean isDayOff(String dayOfTheWeek) {
         return dayOfTheWeek.equals(SATUR_DAY.dayOfWeek) || dayOfTheWeek.equals(SUN_DAY.dayOfWeek);
     }
