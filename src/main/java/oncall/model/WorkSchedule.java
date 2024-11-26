@@ -5,7 +5,7 @@ public class WorkSchedule {
     private final int month;
     private final int date;
     private final String dayOfWeek;
-    private Worker worker;
+    private final Worker worker;
 
     public WorkSchedule(int month, int date, String dayOfWeek, Worker worker) {
         this.month = month;
