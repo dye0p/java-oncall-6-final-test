@@ -1,6 +1,7 @@
 package oncall.controller;
 
 import java.util.List;
+import java.util.function.Supplier;
 import oncall.model.Calender;
 import oncall.model.Day;
 import oncall.model.DayOffWorkers;
@@ -40,42 +41,35 @@ public class OnCallController {
         return scheduleManager.createWorkSchedule();
     }
 
-    private Calender tryReadMonthAndDay() {
+    private <T> T requestRead(Supplier<T> supplier) {
         while (true) {
             try {
-                String[] monthAndDay = inputView.readMonthAndDay();
-
-                Month month = new Month(Integer.parseInt(monthAndDay[0]));
-                Day day = new Day(monthAndDay[1]);
-
-                return new Calender(month, day);
+                return supplier.get();
             } catch (IllegalArgumentException exception) {
                 outputView.printErrorMessage(exception.getMessage());
             }
         }
+    }
+
+    private Calender tryReadMonthAndDay() {
+        return requestRead(() -> {
+            String[] monthAndDay = inputView.readMonthAndDay();
+            Month month = new Month(Integer.parseInt(monthAndDay[0]));
+            Day day = new Day(monthAndDay[1]);
+            return new Calender(month, day);
+        });
     }
 
     private Workers tryReadWorkers() {
-        while (true) {
-            try {
-                WeekdayWorkers weekdayWorkers = tryWeekdayWorkers();
-                DayOffWorkers dayOffWorkers = tryDayOffWorkers();
-                return Workers.of(weekdayWorkers, dayOffWorkers);
-            } catch (IllegalArgumentException exception) {
-                outputView.printErrorMessage(exception.getMessage());
-            }
-        }
+        return requestRead(() -> {
+            WeekdayWorkers weekdayWorkers = tryWeekdayWorkers();
+            DayOffWorkers dayOffWorkers = tryDayOffWorkers();
+            return Workers.of(weekdayWorkers, dayOffWorkers);
+        });
     }
 
     private WeekdayWorkers tryWeekdayWorkers() {
-        while (true) {
-            try {
-                List<Worker> weekdayWorkers = inputView.readWeekdayWorkers();
-                return WeekdayWorkers.from(weekdayWorkers);
-            } catch (IllegalArgumentException exception) {
-                outputView.printErrorMessage(exception.getMessage());
-            }
-        }
+        return requestRead(() -> WeekdayWorkers.from(inputView.readWeekdayWorkers()));
     }
 
     private DayOffWorkers tryDayOffWorkers() {
