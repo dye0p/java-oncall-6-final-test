@@ -7,6 +7,8 @@ import oncall.model.Worker;
 
 public class InputConvertor {
 
+    private static final String MONTH_AND_DAY_DELIMITER = ",";
+
     public static String[] convertMonthAndDay(String input) {
         validate(input);
         String[] monthAndDay = inputSplit(input);
@@ -35,7 +37,7 @@ public class InputConvertor {
 
     private static String[] inputSplit(String input) {
         try {
-            return input.trim().split(",");
+            return input.trim().split(MONTH_AND_DAY_DELIMITER);
         } catch (Exception exception) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }

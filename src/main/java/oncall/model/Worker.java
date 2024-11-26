@@ -5,6 +5,8 @@ import oncall.exception.ErrorMessage;
 
 public class Worker {
 
+    private static final int MAX_NAME_SIZE = 5;
+
     private String name;
 
     public Worker(String name) {
@@ -17,7 +19,7 @@ public class Worker {
     }
 
     private void validate(String name) {
-        if (name.length() > 5) {
+        if (name.length() > MAX_NAME_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
     }

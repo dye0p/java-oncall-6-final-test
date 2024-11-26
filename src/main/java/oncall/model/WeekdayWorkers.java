@@ -6,6 +6,9 @@ import oncall.exception.ErrorMessage;
 
 public class WeekdayWorkers {
 
+    private static final int MIN_WORKER_SIZE = 5;
+    private static final int MAX_WORKER_SIZE = 35;
+
     private final List<Worker> weekdayWorkers;
 
     private WeekdayWorkers(List<Worker> weekdayWorkers) {
@@ -27,7 +30,7 @@ public class WeekdayWorkers {
     }
 
     private void validateSize(List<Worker> workers) {
-        if (workers.size() < 5 || workers.size() > 35) {
+        if (workers.size() < MIN_WORKER_SIZE || workers.size() > MAX_WORKER_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
     }
