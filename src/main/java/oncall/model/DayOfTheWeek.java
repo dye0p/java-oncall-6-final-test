@@ -27,20 +27,18 @@ public enum DayOfTheWeek {
         return dayOfTheWeekValue.dayOfWeek;
     }
 
+    public static boolean isDayOff(String dayOfTheWeek) {
+        return dayOfTheWeek.equals(SATUR_DAY.dayOfWeek) || dayOfTheWeek.equals(SUN_DAY.dayOfWeek);
+    }
+
+    public static boolean isWeekday(String dayOfWeek) {
+        return !isDayOff(dayOfWeek);
+    }
+
     private static DayOfTheWeek findDayOfTheWeekValue(DayOfWeek dayOfTheWeek) {
         return Arrays.stream(values())
                 .filter(value -> value.value == dayOfTheWeek.getValue())
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage()));
-    }
-
-    public static boolean isDayOff(String dayOfTheWeek) {
-        //휴일인지 판단해줘
-        return dayOfTheWeek.equals(SATUR_DAY.dayOfWeek) || dayOfTheWeek.equals(SUN_DAY.dayOfWeek);
-    }
-
-    public static boolean isWeekday(String dayOfWeek) {
-        //평일인지 판단해줘
-        return !isDayOff(dayOfWeek);
     }
 }
