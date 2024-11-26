@@ -3,9 +3,7 @@ package oncall.controller;
 import java.util.List;
 import java.util.function.Supplier;
 import oncall.model.Calender;
-import oncall.model.Day;
 import oncall.model.DayOffWorkers;
-import oncall.model.Month;
 import oncall.model.ScheduleManager;
 import oncall.model.WeekdayWorkers;
 import oncall.model.WorkSchedules;
@@ -56,9 +54,9 @@ public class OnCallController {
     private Calender tryReadMonthAndDay() {
         return requestRead(() -> {
             String[] monthAndDay = inputView.readMonthAndDay();
-            Month month = new Month(Integer.parseInt(monthAndDay[0]));
-            Day day = new Day(monthAndDay[1]);
-            return new Calender(month, day);
+            int month = Integer.parseInt(monthAndDay[0]);
+            String day = monthAndDay[1];
+            return Calender.of(month, day);
         });
     }
 

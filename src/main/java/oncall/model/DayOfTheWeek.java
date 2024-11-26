@@ -22,15 +22,22 @@ public enum DayOfTheWeek {
         this.value = value;
     }
 
+    public static DayOfTheWeek of(String dayOfWeek) {
+        return Arrays.stream(values())
+                .filter(values -> isDayOfWeek(dayOfWeek, values))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage()));
+    }
+
+    private static boolean isDayOfWeek(String dayOfWeek, DayOfTheWeek values) {
+        return values.dayOfWeek.equals(dayOfWeek);
+    }
+
     public static String getDayOfWeek(DayOfWeek dayOfTheWeek) {
         DayOfTheWeek dayOfTheWeekValue = findDayOfTheWeekValue(dayOfTheWeek);
         return dayOfTheWeekValue.dayOfWeek;
     }
 
-    public static boolean isDayOfTheWeek(String day) {
-        return Arrays.stream(values())
-                .anyMatch(value -> value.dayOfWeek.equals(day));
-    }
 
     public static boolean isDayOff(String dayOfTheWeek) {
         return dayOfTheWeek.equals(SATUR_DAY.dayOfWeek) || dayOfTheWeek.equals(SUN_DAY.dayOfWeek);
@@ -45,5 +52,13 @@ public enum DayOfTheWeek {
                 .filter(value -> value.value == dayOfTheWeek.getValue())
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage()));
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
