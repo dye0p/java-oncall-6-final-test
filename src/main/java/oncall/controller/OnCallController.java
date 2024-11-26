@@ -27,10 +27,17 @@ public class OnCallController {
         Calender calender = tryReadMonthAndDay();
         Workers workers = tryReadWorkers();
 
-        ScheduleManager workSchedule = new ScheduleManager(calender, workers);
-        WorkSchedules workSchedules = workSchedule.createWorkSchedule();
+        displayWorkSchedules(calender, workers);
+    }
 
+    private void displayWorkSchedules(Calender calender, Workers workers) {
+        WorkSchedules workSchedules = getWorkSchedules(calender, workers);
         outputView.printWorkSchedules(workSchedules);
+    }
+
+    private WorkSchedules getWorkSchedules(Calender calender, Workers workers) {
+        ScheduleManager scheduleManager = new ScheduleManager(calender, workers);
+        return scheduleManager.createWorkSchedule();
     }
 
     private Calender tryReadMonthAndDay() {
@@ -53,7 +60,7 @@ public class OnCallController {
             try {
                 WeekdayWorkers weekdayWorkers = tryWeekdayWorkers();
                 DayOffWorkers dayOffWorkers = tryDayOffWorkers();
-                return new Workers(weekdayWorkers, dayOffWorkers);
+                return Workers.of(weekdayWorkers, dayOffWorkers);
             } catch (IllegalArgumentException exception) {
                 outputView.printErrorMessage(exception.getMessage());
             }
@@ -64,7 +71,7 @@ public class OnCallController {
         while (true) {
             try {
                 List<Worker> weekdayWorkers = inputView.readWeekdayWorkers();
-                return new WeekdayWorkers(weekdayWorkers);
+                return WeekdayWorkers.from(weekdayWorkers);
             } catch (IllegalArgumentException exception) {
                 outputView.printErrorMessage(exception.getMessage());
             }
@@ -73,6 +80,6 @@ public class OnCallController {
 
     private DayOffWorkers tryDayOffWorkers() {
         List<Worker> dayOffWorkers = inputView.readDayOffWorkers();
-        return new DayOffWorkers(dayOffWorkers);
+        return DayOffWorkers.from(dayOffWorkers);
     }
 }
