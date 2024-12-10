@@ -8,6 +8,8 @@ import oncall.exception.ErrorMessage;
 import oncall.model.Calender;
 import oncall.model.DayOfWeek;
 import oncall.model.Month;
+import oncall.model.WeekdayWorkers;
+import oncall.model.WeekendWorkers;
 import oncall.model.Worker;
 import oncall.model.Workers;
 import oncall.view.InputView;
@@ -25,12 +27,20 @@ public class OnCallController {
 
     public void run() {
         Calender calender = tryMontAndDayOfWeek();
+        Workers workers = tryWorkers();
 
-        //평일 비상 근무 순번 입력
-        Workers weekdayWorker = tryWeekdayWorker();
     }
 
-    private Workers tryWeekdayWorker() {
+    private Workers tryWorkers() {
+        return requestRead(() -> {
+            WeekdayWorkers weekdayWorkers = tryWeekdayWorker();
+            WeekendWorkers weekendWorkers = tryWeekendWorker();
+
+            return new Workers(weekdayWorkers, weekendWorkers);
+        });
+    }
+
+    private WeekdayWorkers tryWeekdayWorker() {
         return requestRead(() -> {
             List<String> weekdayWorkers = inputView.readWeekdayWorker();
 
@@ -39,9 +49,20 @@ public class OnCallController {
                 Worker worker = Worker.from(weekdayWorker);
                 weekdayWorkerDeq.addLast(worker);
             }
-            return Workers.of(weekdayWorkerDeq);
+            return WeekdayWorkers.of(weekdayWorkerDeq);
         });
 
+    }
+
+    private WeekendWorkers tryWeekendWorker() {
+        List<String> weekendWorker = inputView.readWeekendWorker();
+
+        Deque<Worker> weekdayWorkerDeq = new ArrayDeque<>();
+        for (String weekdayWorker : weekendWorker) {
+            Worker worker = Worker.from(weekdayWorker);
+            weekdayWorkerDeq.addLast(worker);
+        }
+        return WeekendWorkers.of(weekdayWorkerDeq);
     }
 
     private Calender tryMontAndDayOfWeek() {

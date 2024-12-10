@@ -20,4 +20,12 @@ public class InputView {
 
         return InputConverter.convertWorker(worker);
     }
+
+    public List<String> readWeekendWorker() {
+        System.out.print("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
+
+        String worker = Console.readLine();
+
+        return InputConverter.convertWorker(worker);
+    }
 }
