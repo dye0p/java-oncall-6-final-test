@@ -33,4 +33,16 @@ public enum Month {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage()));
     }
+
+    public static int getMonthLength(Month month) {
+        Month monthValue = findBy(month);
+        return monthValue.length;
+    }
+
+    private static Month findBy(Month month) {
+        return Arrays.stream(values())
+                .filter(values -> values.month == month.month)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_MONTH.getErrorMessage()));
+    }
 }
