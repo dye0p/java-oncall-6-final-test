@@ -1,5 +1,6 @@
 package oncall.model;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
 import oncall.exception.ErrorMessage;
@@ -29,5 +30,9 @@ public class Workers {
         if (nonDuplicateWorkerSet.size() != workers.size()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
         }
+    }
+
+    public Deque<Worker> getWorkers() {
+        return new ArrayDeque<>(this.workers);
     }
 }

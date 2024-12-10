@@ -1,6 +1,7 @@
 package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 
 public class InputView {
 
@@ -10,5 +11,13 @@ public class InputView {
         String monthAndDayOfWeek = Console.readLine();
 
         return InputConverter.convertMonthAndDayOfWeek(monthAndDayOfWeek);
+    }
+
+    public List<String> readWeekdayWorker() {
+        System.out.print("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
+
+        String worker = Console.readLine();
+
+        return InputConverter.convertWorker(worker);
     }
 }
