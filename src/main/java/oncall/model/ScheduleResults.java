@@ -7,7 +7,7 @@ public class ScheduleResults {
 
     private final List<ScheduleResult> scheduleResults;
 
-    public ScheduleResults(List<ScheduleResult> scheduleResults) {
+    private ScheduleResults(List<ScheduleResult> scheduleResults) {
         this.scheduleResults = scheduleResults;
     }
 
