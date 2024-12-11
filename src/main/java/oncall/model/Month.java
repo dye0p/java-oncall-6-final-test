@@ -34,14 +34,14 @@ public enum Month {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage()));
     }
 
-    public static int getMonthLength(Month month) {
+    public static int getMonthLength(int month) {
         Month monthValue = findBy(month);
         return monthValue.length;
     }
 
-    private static Month findBy(Month month) {
+    private static Month findBy(int month) {
         return Arrays.stream(values())
-                .filter(values -> values.month == month.month)
+                .filter(values -> values.month == month)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_MONTH.getErrorMessage()));
     }

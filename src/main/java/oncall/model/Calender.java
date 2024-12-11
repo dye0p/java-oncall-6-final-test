@@ -15,7 +15,7 @@ public class Calender {
     }
 
     public int getMonthLength() {
-        return Month.getMonthLength(month);
+        return Month.getMonthLength(month.getMonth());
     }
 
     public String getDayOfWeek(int dayOfWeekCount) {
