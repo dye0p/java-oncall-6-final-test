@@ -38,6 +38,10 @@ public enum DayOfWeek {
         return dayOfWeek.equals(DayOfWeek.SAT.name) || dayOfWeek.equals(DayOfWeek.SUN.name);
     }
 
+    public static boolean isWeekday(String dayOfWeek) {
+        return !isWeekend(dayOfWeek);
+    }
+
     public int getValue() {
         return value;
     }

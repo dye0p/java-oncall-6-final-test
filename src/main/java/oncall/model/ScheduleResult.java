@@ -8,6 +8,9 @@ public class ScheduleResult {
     private final String worker;
 
     private ScheduleResult(int month, int date, String dayOfWeek, String worker) {
+        if (DayOfWeek.isWeekday(dayOfWeek) && HolyDay.isHolyDay(month, date)) {
+            dayOfWeek += "(휴일)";
+        }
         this.month = month;
         this.date = date;
         this.dayOfWeek = dayOfWeek;
