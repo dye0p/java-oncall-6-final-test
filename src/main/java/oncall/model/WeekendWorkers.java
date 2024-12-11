@@ -19,6 +19,13 @@ public class WeekendWorkers {
         return new WeekendWorkers(workers);
     }
 
+    public Worker findWorker() {
+        Worker worker = workers.pop();
+        workers.addLast(worker);
+
+        return worker;
+    }
+
     private void validateSize(Deque<Worker> workers) {
         if (workers.size() > 35 || workers.size() < 5) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
