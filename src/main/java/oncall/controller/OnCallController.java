@@ -8,6 +8,8 @@ import oncall.exception.ErrorMessage;
 import oncall.model.Calender;
 import oncall.model.DayOfWeek;
 import oncall.model.Month;
+import oncall.model.Schedule;
+import oncall.model.ScheduleResult;
 import oncall.model.WeekdayWorkers;
 import oncall.model.WeekendWorkers;
 import oncall.model.Worker;
@@ -19,6 +21,7 @@ public class OnCallController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private Schedule schedule;
 
     public OnCallController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -29,6 +32,10 @@ public class OnCallController {
         Calender calender = tryMontAndDayOfWeek();
         Workers workers = tryWorkers();
 
+        schedule = new Schedule(calender, workers);
+        List<ScheduleResult> scheduleResults = schedule.createSchedule();
+
+        outputView.printScheduleResult(scheduleResults);
     }
 
     private Workers tryWorkers() {
