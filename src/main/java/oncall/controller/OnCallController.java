@@ -9,7 +9,7 @@ import oncall.model.Calender;
 import oncall.model.DayOfWeek;
 import oncall.model.Month;
 import oncall.model.Schedule;
-import oncall.model.ScheduleResult;
+import oncall.model.ScheduleResults;
 import oncall.model.WeekdayWorkers;
 import oncall.model.WeekendWorkers;
 import oncall.model.Worker;
@@ -33,9 +33,9 @@ public class OnCallController {
         Workers workers = tryWorkers();
 
         schedule = new Schedule(calender, workers);
-        List<ScheduleResult> scheduleResults = schedule.createSchedule();
+        ScheduleResults scheduleResults = schedule.createSchedule();
 
-        outputView.printScheduleResult(scheduleResults);
+        outputView.printScheduleResult(scheduleResults.getScheduleResults());
     }
 
     private Workers tryWorkers() {

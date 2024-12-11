@@ -13,7 +13,7 @@ public class Schedule {
         this.workers = workers;
     }
 
-    public List<ScheduleResult> createSchedule() {
+    public ScheduleResults createSchedule() {
         int month = calender.getMonth();
         int monthLength = calender.getMonthLength();
         DayOfWeek startDayOfWeek = calender.getStartDayOfWeek();
@@ -31,6 +31,7 @@ public class Schedule {
             ScheduleResult scheduleResult = ScheduleResult.of(month, date, dayOfWeek, worker.getName());
             scheduleResults.add(scheduleResult);
         }
-        return scheduleResults;
+        return ScheduleResults.of(scheduleResults);
     }
+
 }
