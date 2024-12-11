@@ -2,6 +2,8 @@ package oncall.model;
 
 public class ScheduleResult {
 
+    private static final String HOLY_DAY_MARKING = "(휴일)";
+
     private final int month;
     private final int date;
     private final String dayOfWeek;
@@ -9,7 +11,7 @@ public class ScheduleResult {
 
     private ScheduleResult(int month, int date, String dayOfWeek, String worker) {
         if (DayOfWeek.isWeekday(dayOfWeek) && HolyDay.isHolyDay(month, date)) {
-            dayOfWeek += "(휴일)";
+            dayOfWeek += HOLY_DAY_MARKING;
         }
         this.month = month;
         this.date = date;

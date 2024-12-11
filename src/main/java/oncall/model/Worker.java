@@ -5,17 +5,13 @@ import oncall.exception.ErrorMessage;
 
 public class Worker {
 
+    private static final int MAX_NAME_SIZE = 5;
+
     private final String name;
 
     private Worker(String name) {
         validateSize(name);
         this.name = name;
-    }
-
-    private void validateSize(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
-        }
     }
 
     public static Worker from(String name) {
@@ -41,5 +37,11 @@ public class Worker {
 
     public String getName() {
         return name;
+    }
+
+    private void validateSize(String name) {
+        if (name.length() > MAX_NAME_SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
+        }
     }
 }

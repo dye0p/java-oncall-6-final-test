@@ -8,6 +8,8 @@ import oncall.exception.ErrorMessage;
 
 public class InputConverter {
 
+    private static final String DELIMITER = ",";
+
     public static String[] convertMonthAndDayOfWeek(String monthAndDayOfWeek) {
 
         return validateSplit(monthAndDayOfWeek);
@@ -20,7 +22,7 @@ public class InputConverter {
 
     private static String[] validateSplit(String monthAndDayOfWeek) {
         try {
-            return monthAndDayOfWeek.trim().split(",");
+            return monthAndDayOfWeek.trim().split(DELIMITER);
         } catch (PatternSyntaxException exception) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
         }

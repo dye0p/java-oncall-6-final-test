@@ -7,12 +7,13 @@ import oncall.model.ScheduleResult;
 public class OutputFormatter {
 
     private static final String NEXT_LINE = System.lineSeparator();
+    private static final String RESULT_FORMAT = "%s월 %s일 %s %s";
 
     public static String formatScheduleResult(List<ScheduleResult> scheduleResults) {
         StringJoiner sj = new StringJoiner(NEXT_LINE);
 
         for (ScheduleResult scheduleResult : scheduleResults) {
-            String format = String.format("%s월 %s일 %s %s", scheduleResult.getMonth(), scheduleResult.getDate(),
+            String format = String.format(RESULT_FORMAT, scheduleResult.getMonth(), scheduleResult.getDate(),
                     scheduleResult.getDayOfWeek()
                     , scheduleResult.getWorker());
 

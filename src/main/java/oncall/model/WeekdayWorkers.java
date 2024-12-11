@@ -7,6 +7,9 @@ import oncall.exception.ErrorMessage;
 
 public class WeekdayWorkers {
 
+    private static final int MAX_WORKER_SIZE = 35;
+    private static final int MIN_WORKER_SIZE = 5;
+
     private final Deque<Worker> workers;
 
     private WeekdayWorkers(Deque<Worker> workers) {
@@ -27,7 +30,7 @@ public class WeekdayWorkers {
     }
 
     private void validateSize(Deque<Worker> workers) {
-        if (workers.size() > 35 || workers.size() < 5) {
+        if (workers.size() > MAX_WORKER_SIZE || workers.size() < MIN_WORKER_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
         }
     }
