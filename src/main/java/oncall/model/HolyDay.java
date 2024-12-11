@@ -1,5 +1,7 @@
 package oncall.model;
 
+import java.util.Arrays;
+
 public enum HolyDay {
 
     SIN_JUNG(1, 1),
@@ -18,5 +20,10 @@ public enum HolyDay {
     HolyDay(int month, int date) {
         this.month = month;
         this.date = date;
+    }
+
+    public static boolean isHolyDay(int month, int date) {
+        return Arrays.stream(values())
+                .anyMatch(value -> value.month == month && value.date == date);
     }
 }
