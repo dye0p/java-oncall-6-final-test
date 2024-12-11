@@ -5,7 +5,7 @@ public class ScheduleResult {
     private final int month;
     private final int date;
     private final String dayOfWeek;
-    private final String worker;
+    private String worker;
 
     private ScheduleResult(int month, int date, String dayOfWeek, String worker) {
         if (DayOfWeek.isWeekday(dayOfWeek) && HolyDay.isHolyDay(month, date)) {
@@ -35,5 +35,9 @@ public class ScheduleResult {
 
     public String getWorker() {
         return worker;
+    }
+
+    public void setWorker(String worker) {
+        this.worker = worker;
     }
 }
