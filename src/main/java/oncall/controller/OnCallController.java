@@ -34,7 +34,7 @@ public class OnCallController {
 
         schedule = new Schedule(calender, workers);
         ScheduleResults scheduleResults = schedule.createSchedule();
-        scheduleResults.findSequenceWorker();
+        scheduleResults.changeSequenceWorker();
 
         outputView.printScheduleResult(scheduleResults.getScheduleResults());
     }
