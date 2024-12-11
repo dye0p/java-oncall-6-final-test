@@ -24,7 +24,7 @@ public enum DayOfWeek {
 
     public static DayOfWeek of(String date) {
         return Arrays.stream(values())
-                .filter(value -> value.name.equals(date))
+                .filter(value -> isSameName(date, value))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage()));
     }
@@ -44,5 +44,9 @@ public enum DayOfWeek {
 
     public int getValue() {
         return value;
+    }
+
+    private static boolean isSameName(String date, DayOfWeek value) {
+        return value.name.equals(date);
     }
 }

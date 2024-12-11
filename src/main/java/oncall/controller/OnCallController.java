@@ -21,7 +21,6 @@ public class OnCallController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private Schedule schedule;
 
     public OnCallController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -32,11 +31,16 @@ public class OnCallController {
         Calender calender = tryMontAndDayOfWeek();
         Workers workers = tryWorkers();
 
-        schedule = new Schedule(calender, workers);
-        ScheduleResults scheduleResults = schedule.createSchedule();
-        scheduleResults.changeSequenceWorker();
+        ScheduleResults scheduleResults = createWorkSchedule(calender, workers);
 
         outputView.printScheduleResult(scheduleResults.getScheduleResults());
+    }
+
+    private ScheduleResults createWorkSchedule(Calender calender, Workers workers) {
+        Schedule schedule = new Schedule(calender, workers);
+        ScheduleResults scheduleResults = schedule.createSchedule();
+        scheduleResults.changeSequenceWorker();
+        return scheduleResults;
     }
 
     private Workers tryWorkers() {

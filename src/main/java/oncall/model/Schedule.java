@@ -16,14 +16,13 @@ public class Schedule {
     public ScheduleResults createSchedule() {
         int month = calender.getMonth();
         int monthLength = calender.getMonthLength();
-        DayOfWeek startDayOfWeek = calender.getStartDayOfWeek();
-        int dayOfWeekCount = startDayOfWeek.getValue();
+        int dayOfWeekValue = getDayOfWeekValue();
 
         //근무표 생성
         List<ScheduleResult> scheduleResults = new ArrayList<>();
         for (int date = 1; date <= monthLength; date++) {
             //요일
-            String dayOfWeek = calender.getDayOfWeek(dayOfWeekCount++);
+            String dayOfWeek = calender.getDayOfWeek(dayOfWeekValue++);
 
             //해당 하는 요일에 맞는 근무자를 가져온다.
             Worker worker = workers.findWorkerBy(dayOfWeek, month, date);
@@ -34,4 +33,8 @@ public class Schedule {
         return ScheduleResults.of(scheduleResults);
     }
 
+    private int getDayOfWeekValue() {
+        DayOfWeek startDayOfWeek = calender.getStartDayOfWeek();
+        return startDayOfWeek.getValue();
+    }
 }

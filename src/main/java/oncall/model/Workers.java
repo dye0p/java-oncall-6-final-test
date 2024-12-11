@@ -11,9 +11,13 @@ public class Workers {
     }
 
     public Worker findWorkerBy(String dayOfWeek, int month, int date) {
-        if (DayOfWeek.isWeekend(dayOfWeek) || HolyDay.isHolyDay(month, date)) {
+        if (isWeekendAndHolyDay(dayOfWeek, month, date)) {
             return weekendWorkers.findWorker();
         }
         return weekdayWorkers.findWorker();
+    }
+
+    private boolean isWeekendAndHolyDay(String dayOfWeek, int month, int date) {
+        return DayOfWeek.isWeekend(dayOfWeek) || HolyDay.isHolyDay(month, date);
     }
 }
