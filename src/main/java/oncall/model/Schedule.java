@@ -1,5 +1,8 @@
 package oncall.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Schedule {
 
     private final Calender calender;
@@ -10,20 +13,24 @@ public class Schedule {
         this.workers = workers;
     }
 
-    public void createSchedule() {
-        //스케줄 생성
-
-        //스케줄은 입력한 월의 요일부터 시작한다.
-
-        //해당 하는 월의 마지막 일수를 가져온다.
+    public List<ScheduleResult> createSchedule() {
+        int month = calender.getMonth();
         int monthLength = calender.getMonthLength();
         DayOfWeek startDayOfWeek = calender.getStartDayOfWeek();
         int dayOfWeekCount = startDayOfWeek.getValue();
 
         //근무표 생성
+        List<ScheduleResult> scheduleResults = new ArrayList<>();
         for (int date = 1; date <= monthLength; date++) {
-            //월 날짜 요일 근무자
+            //요일
             String dayOfWeek = calender.getDayOfWeek(dayOfWeekCount++);
+
+            //해당 하는 요일에 맞는 근무자를 가져온다.
+            Worker worker = workers.findWorkerBy(dayOfWeek, month, date);
+
+            ScheduleResult scheduleResult = ScheduleResult.of(month, date, dayOfWeek, worker.getName());
+            scheduleResults.add(scheduleResult);
         }
+        return scheduleResults;
     }
 }
